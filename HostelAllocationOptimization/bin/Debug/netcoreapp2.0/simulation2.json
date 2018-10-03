@@ -1,0 +1,29 @@
+{
+  "numDays": 3,
+  "numRooms": 3,
+  "groupsSizes": [2, 3, 1, 4, 4, 3, 4],
+  "roomCapacity": [4, 8, 5],
+  "groupsDemands": 
+	[
+		{ "Item1": 0, "Item2": 0 },
+		{ "Item1": 0, "Item2": 1 },
+		{ "Item1": 1, "Item2": 0 },
+		{ "Item1": 1, "Item2": 1 },
+		{ "Item1": 2, "Item2": 0 },
+		{ "Item1": 2, "Item2": 1 },
+		{ "Item1": 2, "Item2": 2 },
+		{ "Item1": 3, "Item2": 1 },
+		{ "Item1": 3, "Item2": 2 },
+		{ "Item1": 4, "Item2": 1 },
+		{ "Item1": 4, "Item2": 2 },
+		{ "Item1": 5, "Item2": 1 },
+		{ "Item1": 5, "Item2": 2 },
+		{ "Item1": 6, "Item2": 2 },
+	],
+  "initialAllocation": 
+	[
+		{ "Item1": 0, "Item2": 0 },
+		{ "Item1": 1, "Item2": 1 },
+		{ "Item1": 2, "Item2": 2 },
+	]
+}
