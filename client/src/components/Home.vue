@@ -13,7 +13,9 @@
             <el-button type="success" @click="callTest">Call Test</el-button>
             <div v-for="dayAllocation in daysAllocation" :key="dayAllocation.id" style="padding-top: 20px">
               <el-tag type="info">Day {{ dayAllocation.id }}</el-tag>
-              <result :roomAllocation="dayAllocation.roomAllocation" />
+              <el-tag style="margin-left: 10px" type="info">Func. Obj {{ funcObj }}</el-tag>
+              <el-tag style="margin-left: 10px" type="info">Groups Splits {{ dayAllocation.numGroupsSplits }}</el-tag>
+              <result :roomAllocation="dayAllocation.roomAllocation" :funcObj="funcObj"/>
             </div>
           </el-tab-pane>
           <el-tab-pane label="Input">
@@ -127,7 +129,8 @@ export default {
       groupsArr: [],
       groupsSizes: [],
       groupsAllocation: [],
-      initialAllocation: []
+      initialAllocation: [],
+      funcObj: []
     }
   },
   methods: {
@@ -244,7 +247,10 @@ export default {
         groupsSizes: this.groupsSizes
       }
       axios.post('http://localhost:52904/api/optimizer', hostelAllocation)
-        .then(response => console.log('response'))
+        .then(response => {
+          console.log('response')
+          this.funcObj = response.data[0].funcObj
+        })
         .catch(error => console.log(error))
     },
     createGroupDemands () {
@@ -292,10 +298,10 @@ export default {
       } else {
         axios.get('http://localhost:52904/api/Optimizer?jsonFile=' + this.testFileName)
           .then(response => {
-            console.log('response')
-            console.log(response.data)
+            this.funcObj = response.data[0].funcObj
             this.daysAllocation = response.data.map((r, index) => {
               return {
+                numGroupsSplits: r.numGroupsSplits,
                 roomAllocation: r.roomAllocation,
                 id: index
               }

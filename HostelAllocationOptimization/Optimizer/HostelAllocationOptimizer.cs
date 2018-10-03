@@ -292,11 +292,11 @@ namespace HostelAllocationOptimization.Optimizer
                             {
                                 if (k == 0 && initialAllocation.Any(d => d.Item1 == i) && groupsDemands.Any(d => d.Item1 == i && d.Item2 == k + 1))
                                 {
-                                    model.AddConstr((1 - x[i, j, k]) + x[i, j, k + 1] + y[i, k] >= 1, "Grupo " + i + " mudou de quarto dia " + k);
+                                    model.AddConstr((1 - x[i, j, k]) + x[i, j, k + 1] + y[i, k + 1] >= 1, "Grupo " + i + " mudou de quarto dia " + k);
                                 }
                                 else if (groupsDemands.Any(d => d.Item1 == i && d.Item2 == k) && groupsDemands.Any(d => d.Item1 == i && d.Item2 == k + 1)) // O grupo tem demanda para o dia seguinte
                                 {
-                                    model.AddConstr((1 - x[i, j, k]) + x[i, j, k + 1] + y[i, k] >= 1, "Grupo " + i + " mudou de quarto dia " + k);
+                                    model.AddConstr((1 - x[i, j, k]) + x[i, j, k + 1] + y[i, k + 1] >= 1, "Grupo " + i + " mudou de quarto dia " + k);
                                 }
 
                             }
@@ -341,6 +341,11 @@ namespace HostelAllocationOptimization.Optimizer
             }
         }
 
+        //public static List<DailyRoomAllocation> OptimeWithGroupBreak(string jsonFileName)
+        //{
+
+        //}
+
         public static List<DailyGroupsAllocationDTO> ListDailyGroupsAllocation(GRBVar[,,] x, GRBVar[,] y, double objVal)
         {
             int numGroups = x.GetLength(0);
@@ -374,8 +379,12 @@ namespace HostelAllocationOptimization.Optimizer
             for (int k = 0; k < x.GetLength(2); k++)
             {
                 DailyRoomAllocation dailyAllocation = new DailyRoomAllocation();
+                int numGroupsSplits = 0;
                 for (int i = 0; i < x.GetLength(0); i++)
                 {
+                    if (y[i, k].X == 1)
+                        numGroupsSplits++;
+
                     for (int j = 0; j < x.GetLength(1); j++)
                     {
                         if(x[i, j, k].X == 1)
@@ -384,6 +393,8 @@ namespace HostelAllocationOptimization.Optimizer
                         }
                     }
                 }
+                dailyAllocation.NumGroupsSplits = numGroupsSplits;
+                dailyAllocation.FuncObj = objVal;
                 dailyAllocation.FillRoomAllocation(numRooms);
                 roomsAllocation.Add(dailyAllocation);
             }
@@ -392,3 +403,4 @@ namespace HostelAllocationOptimization.Optimizer
         }
     }
 }
+

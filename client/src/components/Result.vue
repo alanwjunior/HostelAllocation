@@ -21,6 +21,10 @@ export default {
     roomAllocation: {
       required: true,
       type: Object
+    },
+    funcObj: {
+      required: true,
+      type: Number
     }
   }
 }

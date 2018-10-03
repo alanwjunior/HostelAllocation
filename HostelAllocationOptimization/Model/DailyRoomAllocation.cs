@@ -11,6 +11,10 @@ namespace HostelAllocationOptimization.Model
 
         public Dictionary<int, string> RoomAllocation { get; set; }
 
+        public int NumGroupsSplits { get; set; }
+
+        public double FuncObj { get; set; }
+
         public DailyRoomAllocation()
         {
             RoomGroupsAllocated = new List<Tuple<int, int>>();
