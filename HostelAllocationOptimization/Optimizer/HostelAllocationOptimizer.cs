@@ -177,7 +177,7 @@ namespace HostelAllocationOptimization.Optimizer
         {
             try
             {
-                string path= "C:\\Users\\Alan.ALANJUNIORPC\\Desktop\\tcc\\TCC\\TCC2\\Gurobi\\Teste1\\gurobi\\bin\\Debug\\netcoreapp2.1\\" + jsonFileName;
+                string path= "C:\\Users\\alanw\\OneDrive\\Documentos\\GitHub\\HostelAllocation\\HostelAllocationOptimization\\bin\\Debug\\netcoreapp2.0\\" + jsonFileName;
                 using (StreamReader file = File.OpenText(path))
                 {
                     var json = file.ReadToEnd();

@@ -12,3 +12,17 @@ C:\Users\Alan.ALANJUNIORPC\Desktop\tcc\TCC\TCC2\HostelAllocationOptimization\API
 C:\Users\Alan.ALANJUNIORPC\Desktop\tcc\TCC\TCC2\HostelAllocationOptimization\API\HostelAllocationOptimization\HostelAllocationOptimization\bin\Debug\netcoreapp2.0\gurobi80.netstandard20.xml
 C:\Users\Alan.ALANJUNIORPC\Desktop\tcc\TCC\TCC2\HostelAllocationOptimization\API\HostelAllocationOptimization\HostelAllocationOptimization\obj\Debug\netcoreapp2.0\HostelAllocationOptimization.csproj.CopyComplete
 C:\Users\Alan.ALANJUNIORPC\Desktop\tcc\TCC\TCC2\HostelAllocationOptimization\API\HostelAllocationOptimization\HostelAllocationOptimization\obj\Debug\netcoreapp2.0\HostelAllocationOptimization.csprojResolveAssemblyReference.cache
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\bin\Debug\netcoreapp2.0\HostelAllocationOptimization.deps.json
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\bin\Debug\netcoreapp2.0\HostelAllocationOptimization.runtimeconfig.json
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\bin\Debug\netcoreapp2.0\HostelAllocationOptimization.runtimeconfig.dev.json
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\bin\Debug\netcoreapp2.0\HostelAllocationOptimization.dll
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\bin\Debug\netcoreapp2.0\HostelAllocationOptimization.pdb
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\bin\Debug\netcoreapp2.0\gurobi80.netstandard20.dll
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\bin\Debug\netcoreapp2.0\gurobi80.netstandard20.xml
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\obj\Debug\netcoreapp2.0\HostelAllocationOptimization.csprojAssemblyReference.cache
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\obj\Debug\netcoreapp2.0\HostelAllocationOptimization.csproj.CoreCompileInputs.cache
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\obj\Debug\netcoreapp2.0\HostelAllocationOptimization.AssemblyInfoInputs.cache
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\obj\Debug\netcoreapp2.0\HostelAllocationOptimization.AssemblyInfo.cs
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\obj\Debug\netcoreapp2.0\HostelAllocationOptimization.csproj.CopyComplete
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\obj\Debug\netcoreapp2.0\HostelAllocationOptimization.dll
+C:\Users\alanw\OneDrive\Documentos\GitHub\HostelAllocation\HostelAllocationOptimization\obj\Debug\netcoreapp2.0\HostelAllocationOptimization.pdb
