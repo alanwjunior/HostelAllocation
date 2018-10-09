@@ -11,6 +11,7 @@
             </el-form>
             <el-button type="success" @click="createTest">Random Test</el-button>
             <el-button type="success" @click="callTest">Call Test</el-button>
+            <el-button type="success" @click="callv2Test">Call v2. Test</el-button>
             <div v-for="dayAllocation in daysAllocation" :key="dayAllocation.id" style="padding-top: 20px">
               <el-tag type="info">Day {{ dayAllocation.id }}</el-tag>
               <el-tag style="margin-left: 10px" type="info">Func. Obj {{ funcObj }}</el-tag>
@@ -297,6 +298,33 @@ export default {
         })
       } else {
         axios.get('http://localhost:52904/api/Optimizer?jsonFile=' + this.testFileName)
+          .then(response => {
+            this.funcObj = response.data[0].funcObj
+            this.daysAllocation = response.data.map((r, index) => {
+              return {
+                numGroupsSplits: r.numGroupsSplits,
+                roomAllocation: r.roomAllocation,
+                id: index
+              }
+            })
+            console.log(this.daysAllocation)
+          })
+          .catch(error => {
+            this.$notify({
+              title: 'Error',
+              message: error.message
+            })
+          })
+      }
+    },
+    callv2Test () {
+      if (!this.testFileName) {
+        this.$notify({
+          title: 'Invalid File Test name',
+          message: 'Invalid File Test name'
+        })
+      } else {
+        axios.get('http://localhost:52904/api/optimizer/breakgroups?jsonFile=' + this.testFileName)
           .then(response => {
             this.funcObj = response.data[0].funcObj
             this.daysAllocation = response.data.map((r, index) => {
