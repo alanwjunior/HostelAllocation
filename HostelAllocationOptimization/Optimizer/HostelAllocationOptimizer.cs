@@ -395,14 +395,14 @@ namespace HostelAllocationOptimization.Optimizer
                     }
 
                     //variável de decisão: yik - se o grupo i mudou de quarto no dia k
-                    //GRBVar[,] y = new GRBVar[numGroups, numDays];
-                    //for (int i = 0; i < numGroups; i++)
-                    //{
-                    //    for (int k = 0; k < numDays; k++)
-                    //    {
-                    //        y[i, k] = model.AddVar(0, 1, 0, GRB.BINARY, "Grupo " + i + " mudou quarto no dia " + k);
-                    //    }
-                    //}
+                    GRBVar[,] y = new GRBVar[numGroups, numDays];
+                    for (int i = 0; i < numGroups; i++)
+                    {
+                        for (int k = 0; k < numDays; k++)
+                        {
+                            y[i, k] = model.AddVar(0, 1, 0, GRB.BINARY, "Grupo " + i + " mudou quarto no dia " + k);
+                        }
+                    }
 
                     //variável de decisão: Zik se o grupo i foi quebrado no dia k
                     GRBVar[,] z = new GRBVar[numGroups, numDays];
@@ -446,31 +446,25 @@ namespace HostelAllocationOptimization.Optimizer
                         }
                     }
 
-                    //Restrição 3: Mudança de quarto do grupo
-                    //for (int i = 0; i < numGroups; i++)
-                    //{
-                    //    for (int j = 0; j < numRooms; j++)
-                    //    {
-                    //        for (int k = 0; k < numDays - 1; k++)
-                    //        {
-                    //            if (k == 0 && initialAllocation.Any(d => d.Item1 == personGroupRelation[i]) && groupsDemands.Any(d => d.Item1 == personGroupRelation[i] && d.Item2 == k + 1))
-                    //            {
-                    //                var peopleFromGroup = personGroupRelation.Where(p => p.Value == i).ToList();
-                    //                GRBLinExpr totalPeopleGroupInRoom = 0.0;
-                    //                foreach (var person in peopleFromGroup)
-                    //                {
-                    //                    totalPeopleGroupInRoom.AddTerm(1, x[person.K])
-                    //                }
-                    //                model.AddConstr((1 - x[i, j, k]) + x[i, j, k + 1] + y[i, k + 1] >= 1, "Grupo " + i + " mudou de quarto dia " + k);
-                    //            }
-                    //            else if (groupsDemands.Any(d => d.Item1 == personGroupRelation[i] && d.Item2 == k) && groupsDemands.Any(d => d.Item1 == personGroupRelation[i] && d.Item2 == k + 1)) // O grupo tem demanda para o dia seguinte
-                    //            {
-                    //                model.AddConstr((1 - x[i, j, k]) + x[i, j, k + 1] + y[i, k + 1] >= 1, "Grupo " + i + " mudou de quarto dia " + k);
-                    //            }
+                    //Restrição 3: se o grupo i tivesse no quarto j no dia k e no dia k + 1 ele não estiver, ele mudou de quarto
+                    for (int i = 0; i < numPeople; i++)
+                    {
+                        for (int j = 0; j < numRooms; j++)
+                        {
+                            for (int k = 0; k < numDays - 1; k++)
+                            {
+                                if (k == 0 && initialAllocation.Any(d => d.Item1 == personGroupRelation[i]) && groupsDemands.Any(d => d.Item1 == personGroupRelation[i] && d.Item2 == k + 1))
+                                {
+                                    model.AddConstr((1 - x[i, j, k]) + x[i, j, k + 1] + y[personGroupRelation[i], k + 1] >= 1, "Grupo " + i + " mudou de quarto dia " + k);
+                                }
+                                else if (groupsDemands.Any(d => d.Item1 == i && d.Item2 == k) && groupsDemands.Any(d => d.Item1 == i && d.Item2 == k + 1)) // O grupo tem demanda para o dia seguinte
+                                {
+                                    model.AddConstr((1 - x[i, j, k]) + x[i, j, k + 1] + y[personGroupRelation[i], k + 1] >= 1, "Grupo " + i + " mudou de quarto dia " + k);
+                                }
 
-                    //        }
-                    //    }
-                    //}
+                            }
+                        }
+                    }
 
                     // Restrição 4: quebra do grupo
                     for (int k = 0; k < numDays; k++)
@@ -501,7 +495,7 @@ namespace HostelAllocationOptimization.Optimizer
                     {
                         for (int k = 0; k < numDays; k++)
                         {
-                            //obj.AddTerm(groupSize[i], y[i, k]);
+                            obj.AddTerm(groupSize[i], y[i, k]);
                             obj.AddTerm(groupSize[i], z[i, k]);
                         }
                     }
