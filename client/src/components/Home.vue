@@ -307,12 +307,13 @@ export default {
                 id: index
               }
             })
-            console.log(this.daysAllocation)
           })
           .catch(error => {
+            console.log('error')
+            console.log(error)
             this.$notify({
               title: 'Error',
-              message: error.message
+              message: 'Infeasible model'
             })
           })
       }
@@ -324,7 +325,7 @@ export default {
           message: 'Invalid File Test name'
         })
       } else {
-        axios.get('http://localhost:52904/api/optimizer/breakgroups?jsonFile=' + this.testFileName)
+        axios.get('http://localhost:52904/api/Optimizer/Breakgroups?jsonFile=' + this.testFileName)
           .then(response => {
             this.funcObj = response.data[0].funcObj
             this.daysAllocation = response.data.map((r, index) => {

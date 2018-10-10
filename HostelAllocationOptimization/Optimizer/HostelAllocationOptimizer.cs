@@ -320,7 +320,7 @@ namespace HostelAllocationOptimization.Optimizer
 
                     if (model.Status == GRB.Status.INFEASIBLE)
                     {
-                        throw new Exception("Infeasible model");
+                        throw new ApplicationException("Infeasible model");
                     }
 
                     //var allocation = ListDailyGroupsAllocation(x, y, model.ObjVal);
@@ -336,8 +336,7 @@ namespace HostelAllocationOptimization.Optimizer
 
             catch (GRBException e)
             {
-                //Console.WriteLine("Error code: " + e.ErrorCode + ". " + e.Message);
-                throw;
+                throw e;
             }
         }
 
@@ -434,8 +433,9 @@ namespace HostelAllocationOptimization.Optimizer
                         for (int k = 0; k < numDays; k++)
                         {
                             GRBLinExpr demGroup = 0.0;
-                            var personGroup = personGroupRelation.GetValueOrDefault(i);
-                            if (groupsDemands.Any(d => d.Item1 == personGroup && d.Item2 == k))
+                            var personGroup = personGroupRelation[i];
+                            var groupAlloc = groupsDemands.Any(d => d.Item1 == personGroup && d.Item2 == k);
+                            if (groupAlloc)
                             {
                                 for (int j = 0; j < numRooms; j++)
                                 {
@@ -457,7 +457,7 @@ namespace HostelAllocationOptimization.Optimizer
                                 {
                                     model.AddConstr((1 - x[i, j, k]) + x[i, j, k + 1] + y[personGroupRelation[i], k + 1] >= 1, "Grupo " + i + " mudou de quarto dia " + k);
                                 }
-                                else if (groupsDemands.Any(d => d.Item1 == i && d.Item2 == k) && groupsDemands.Any(d => d.Item1 == i && d.Item2 == k + 1)) // O grupo tem demanda para o dia seguinte
+                                else if (groupsDemands.Any(d => d.Item1 == personGroupRelation[i] && d.Item2 == k) && groupsDemands.Any(d => d.Item1 == personGroupRelation[i] && d.Item2 == k + 1)) // O grupo tem demanda para o dia seguinte
                                 {
                                     model.AddConstr((1 - x[i, j, k]) + x[i, j, k + 1] + y[personGroupRelation[i], k + 1] >= 1, "Grupo " + i + " mudou de quarto dia " + k);
                                 }
