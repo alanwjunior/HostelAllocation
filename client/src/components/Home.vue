@@ -17,6 +17,8 @@
               <el-tag style="margin-left: 10px" type="info">Func. Obj {{ funcObj }}</el-tag>
               <el-tag style="margin-left: 10px" type="info">Groups Room Changes {{ dayAllocation.numGroupsSplits }}</el-tag>
               <el-tag style="margin-left: 10px" type="info">Groups Spliteds {{ dayAllocation.numGroupsSplited }}</el-tag>
+              <el-tag style="margin-left: 10px" type="info"><i class="el-icon-arrow-right"></i>Groups Entered {{ dayAllocation.groupsIn }}</el-tag>
+              <el-tag style="margin-left: 10px" type="info"><i class="el-icon-arrow-left"></i>Groups Left {{ dayAllocation.groupsOut }}</el-tag>
               <result :roomAllocation="dayAllocation.roomAllocation" :funcObj="funcObj"/>
             </div>
           </el-tab-pane>
@@ -335,7 +337,9 @@ export default {
                 numGroupsSplits: r.numGroupsSplits,
                 numGroupsSplited: r.numGroupsChanges,
                 roomAllocation: r.roomAllocation,
-                id: index
+                id: index,
+                groupsIn: r.groupsEntered,
+                groupsOut: r.groupsLeft
               }
             })
             console.log(this.daysAllocation)

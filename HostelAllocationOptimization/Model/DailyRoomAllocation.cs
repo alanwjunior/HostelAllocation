@@ -15,11 +15,11 @@ namespace HostelAllocationOptimization.Model
 
         public double NumGroupsChanges { get; set; }
 
-        public int[] GroupsIn { get; set; }
-
-        public int[] GroupsOut { get; set; }
-
         public double FuncObj { get; set; }
+
+        public string GroupsEntered { get; set; }
+
+        public string GroupsLeft { get; set; }
 
         public DailyRoomAllocation()
         {

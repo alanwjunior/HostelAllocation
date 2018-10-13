@@ -860,10 +860,31 @@ namespace HostelAllocationOptimization.Optimizer
                 dailyAllocation.NumGroupsChanges = numGroupsChanges;
                 dailyAllocation.FuncObj = objVal;
                 dailyAllocation.FillRoomAllocation(numRooms);
+                if(k != 0)
+                    FillGroupsEnteredLeft(dailyAllocation, roomsAllocation.Last());
                 roomsAllocation.Add(dailyAllocation);
             }
 
             return roomsAllocation;
+        }
+
+        private static void FillGroupsEnteredLeft(DailyRoomAllocation dailyAllocation, DailyRoomAllocation previousAllocation)
+        {
+            var groups = dailyAllocation.RoomGroupsAllocated.Select(g => g.Item2).Distinct();
+            var lastDayGroups = previousAllocation.RoomGroupsAllocated.Select(g => g.Item2).Distinct();
+            List<int> groupsEntered = new List<int>();
+            List<int> groupsLeft = new List<int>();
+            foreach (var group in groups)
+            {
+                if(lastDayGroups.Any(g => g == group)) {
+                    groupsEntered.Add(group);
+                } else
+                {
+                    groupsLeft.Add(group);
+                }
+            }
+            dailyAllocation.GroupsEntered = string.Join(";", groupsEntered);
+            dailyAllocation.GroupsLeft = string.Join(";", groupsLeft);
         }
     }
 }
