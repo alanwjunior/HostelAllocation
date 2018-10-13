@@ -25,7 +25,7 @@ namespace HostelAllocationOptimization.Controllers
 
         [Route("Breakgroups")]
         [HttpGet]
-        public List<DailyPeopleAllocation> OptimizeWithBreakGroups(string jsonFile)
+        public List<DailyRoomAllocation> OptimizeWithBreakGroups(string jsonFile)
         {
             return HostelAllocationOptimizer.OptimizeWithGroupSplit(jsonFile);
         }

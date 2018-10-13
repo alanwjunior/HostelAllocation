@@ -340,7 +340,7 @@ namespace HostelAllocationOptimization.Optimizer
             }
         }
 
-        public static List<DailyPeopleAllocation> OptimizeWithGroupSplit(string jsonFileName)
+        public static List<DailyRoomAllocation> OptimizeWithGroupSplit(string jsonFileName)
         {
             try
             {
@@ -389,7 +389,7 @@ namespace HostelAllocationOptimization.Optimizer
                         var groupPeople = personGroupRelation.Where(p => p.Value == alocation.Item1).ToList();
                         foreach(var person in groupPeople)
                         {
-                            x[person.Key, person.Value, 0].Set(GRB.DoubleAttr.LB, 1);
+                            x[person.Key, alocation.Item2, 0].Set(GRB.DoubleAttr.LB, 1);
                         }
                     }
 
@@ -505,19 +505,20 @@ namespace HostelAllocationOptimization.Optimizer
                     // Optimize model
                     model.Optimize();
 
+
                     if (model.Status == GRB.Status.INFEASIBLE)
                     {
                         throw new Exception("Infeasible model");
                     }
 
-                    //var allocation = ListDailyGroupsAllocation(x, y, model.ObjVal);
-                    var roomsAllocation = ListDailyPeopleRoomAllocation(x, z, model.ObjVal);
+                    var allocation = ListDailyRoomAllocation(x, y, z, personGroupRelation, model.ObjVal);
+                    //var roomsAllocation = ListDailyPeopleRoomAllocation(x, z, model.ObjVal);
 
                     // Dispose of model and env
                     model.Dispose();
                     env.Dispose();
 
-                    return roomsAllocation;
+                    return allocation;
                 }
             }
 
@@ -619,6 +620,44 @@ namespace HostelAllocationOptimization.Optimizer
                         }
                     }
                 }
+                roomsAllocation.Add(dailyAllocation);
+            }
+
+            return roomsAllocation;
+        }
+
+        public static List<DailyRoomAllocation> ListDailyRoomAllocation(GRBVar[,,] x, GRBVar[,] y, GRBVar[,] z, 
+            Dictionary<int,int> personToGroup, double objVal)
+        {
+            int numGroups = x.GetLength(0);
+            int numRooms = x.GetLength(1);
+
+            List<DailyRoomAllocation> roomsAllocation = new List<DailyRoomAllocation>();
+
+            for (int k = 0; k < x.GetLength(2); k++)
+            {
+                DailyRoomAllocation dailyAllocation = new DailyRoomAllocation();
+                double numGroupsSplits = 0;
+                double numGroupsChanges = 0;
+                for (int i = 0; i < x.GetLength(0); i++)
+                {
+                    if (y[personToGroup[i], k].X == 1)
+                        numGroupsSplits += 1 / Convert.ToDouble(personToGroup.Where(p => p.Value == personToGroup[i]).Count());
+                    if (z[personToGroup[i], k].X == 1)
+                        numGroupsChanges += 1 / Convert.ToDouble(personToGroup.Where(p => p.Value == personToGroup[i]).Count());
+
+                    for (int j = 0; j < x.GetLength(1); j++)
+                    {
+                        if (x[i, j, k].X == 1)
+                        {
+                            dailyAllocation.RoomGroupsAllocated.Add(new Tuple<int, int>(j, personToGroup[i]));
+                        }
+                    }
+                }
+                dailyAllocation.NumGroupsSplits = numGroupsSplits;
+                dailyAllocation.NumGroupsChanges = numGroupsChanges;
+                dailyAllocation.FuncObj = objVal;
+                dailyAllocation.FillRoomAllocation(numRooms);
                 roomsAllocation.Add(dailyAllocation);
             }
 

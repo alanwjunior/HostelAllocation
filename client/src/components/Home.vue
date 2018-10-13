@@ -15,7 +15,8 @@
             <div v-for="dayAllocation in daysAllocation" :key="dayAllocation.id" style="padding-top: 20px">
               <el-tag type="info">Day {{ dayAllocation.id }}</el-tag>
               <el-tag style="margin-left: 10px" type="info">Func. Obj {{ funcObj }}</el-tag>
-              <el-tag style="margin-left: 10px" type="info">Groups Splits {{ dayAllocation.numGroupsSplits }}</el-tag>
+              <el-tag style="margin-left: 10px" type="info">Groups Room Changes {{ dayAllocation.numGroupsSplits }}</el-tag>
+              <el-tag style="margin-left: 10px" type="info">Groups Spliteds {{ dayAllocation.numGroupsSplited }}</el-tag>
               <result :roomAllocation="dayAllocation.roomAllocation" :funcObj="funcObj"/>
             </div>
           </el-tab-pane>
@@ -303,6 +304,7 @@ export default {
             this.daysAllocation = response.data.map((r, index) => {
               return {
                 numGroupsSplits: r.numGroupsSplits,
+                numGroupsSplited: r.numGroupsChanges,
                 roomAllocation: r.roomAllocation,
                 id: index
               }
@@ -331,6 +333,7 @@ export default {
             this.daysAllocation = response.data.map((r, index) => {
               return {
                 numGroupsSplits: r.numGroupsSplits,
+                numGroupsSplited: r.numGroupsChanges,
                 roomAllocation: r.roomAllocation,
                 id: index
               }

@@ -11,7 +11,13 @@ namespace HostelAllocationOptimization.Model
 
         public Dictionary<int, string> RoomAllocation { get; set; }
 
-        public int NumGroupsSplits { get; set; }
+        public double NumGroupsSplits { get; set; }
+
+        public double NumGroupsChanges { get; set; }
+
+        public int[] GroupsIn { get; set; }
+
+        public int[] GroupsOut { get; set; }
 
         public double FuncObj { get; set; }
 

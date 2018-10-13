@@ -11,9 +11,9 @@ namespace HostelAllocationOptimization.Controllers
     public class TestFactoryController : Controller
     {
         [HttpGet]
-        public List<DailyRoomAllocation> CreateTest(string fileName)
+        public HostelAllocationDTO CreateTest(string fileName)
         {
-            return TestFactory.TestFactory.CreateRandomTestFile(fileName);
+            return TestFactory.TestFactory.CreateRandomTest(fileName);
         }
     }
 }
