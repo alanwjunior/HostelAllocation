@@ -1,8 +1,18 @@
 <template>
   <div id="app">
+    <spinner />
     <router-view/>
   </div>
 </template>
+
+<script>
+import Spinner from './components/Spinner.vue'
+export default {
+  components: {
+    Spinner: Spinner
+  }
+}
+</script>
 
 <style>
 #app {

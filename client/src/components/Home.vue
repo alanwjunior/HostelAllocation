@@ -3,15 +3,15 @@
     <el-row type="flex" justify="center" class="card-steps">
       <el-col :span="16">
         <el-tabs type="border-card">
-          <el-tab-pane label="Random Test">
+          <el-tab-pane label="Test Factory">
             <el-form :label-position="'top'" label-width="100px" :model="formLabelAlign" class="form-initial-configs">
               <el-form-item :label="'File Name'">
                 <el-input placeholder="Please input the file name" v-model="testFileName"></el-input>
               </el-form-item>
             </el-form>
-            <el-button type="success" @click="createTest">Random Test</el-button>
-            <el-button type="success" @click="callTest">Call Test</el-button>
-            <el-button type="success" @click="callv2Test">Call v2. Test</el-button>
+            <el-button type="success" @click="createTest">Create Random Test</el-button>
+            <el-button type="success" @click="callTest">Call First Model</el-button>
+            <el-button type="success" @click="callv2Test">Call Second Model</el-button>
             <div v-for="dayAllocation in daysAllocation" :key="dayAllocation.id" style="padding-top: 20px">
               <el-tag type="info">Day {{ dayAllocation.id }}</el-tag>
               <el-tag style="margin-left: 10px" type="info">Func. Obj {{ funcObj }}</el-tag>
@@ -306,7 +306,7 @@ export default {
             this.daysAllocation = response.data.map((r, index) => {
               return {
                 numGroupsSplits: r.numGroupsSplits,
-                numGroupsSplited: r.numGroupsChanges,
+                numGroupsSplited: Math.round(r.numGroupsChanges),
                 roomAllocation: r.roomAllocation,
                 id: index
               }
@@ -335,7 +335,7 @@ export default {
             this.daysAllocation = response.data.map((r, index) => {
               return {
                 numGroupsSplits: r.numGroupsSplits,
-                numGroupsSplited: r.numGroupsChanges,
+                numGroupsSplited: Math.round(r.numGroupsChanges),
                 roomAllocation: r.roomAllocation,
                 id: index,
                 groupsIn: r.groupsEntered,
