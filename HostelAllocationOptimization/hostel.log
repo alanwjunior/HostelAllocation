@@ -8046,3 +8046,56 @@ Solution count 10: 52 54 59 ... 119
 
 Optimal solution found (tolerance 1.00e-04)
 Best objective 5.200000000000e+01, best bound 5.200000000000e+01, gap 0.0000%
+
+Gurobi 8.0.1 (win64, .NET) logging started 10/21/18 23:47:08
+
+Academic license - for non-commercial use only
+Optimize a model with 18713 rows, 17836 columns and 128871 nonzeros
+Variable types: 0 continuous, 17836 integer (17836 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 1e+00]
+  Objective range  [1e+00, 9e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 8e+00]
+Found heuristic solution: objective 424.0000000
+Presolve removed 12063 rows and 11198 columns
+Presolve time: 0.33s
+Presolved: 6650 rows, 6638 columns, 47289 nonzeros
+Variable types: 0 continuous, 6638 integer (6638 binary)
+
+Root relaxation: objective 3.616667e+01, 3219 iterations, 0.33 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   36.16667    0  449  424.00000   36.16667  91.5%     -    1s
+H    0     0                     246.0000000   36.16667  85.3%     -    1s
+H    0     0                     189.0000000   36.16667  80.9%     -    1s
+     0     0   40.41666    0  716  189.00000   40.41666  78.6%     -    1s
+     0     0   40.41666    0  430  189.00000   40.41666  78.6%     -    2s
+     0     0  104.00000    0  194  189.00000  104.00000  45.0%     -    4s
+H    0     0                     185.0000000  104.00000  43.8%     -    4s
+     0     0  104.00000    0  204  185.00000  104.00000  43.8%     -    4s
+     0     0  104.00000    0  190  185.00000  104.00000  43.8%     -    4s
+H    0     0                     160.0000000  104.00000  35.0%     -    4s
+H    0     0                     125.0000000  104.00000  16.8%     -    5s
+     0     0  104.00000    0  102  125.00000  104.00000  16.8%     -    5s
+     0     0  104.00000    0   36  125.00000  104.00000  16.8%     -    5s
+H    0     0                     106.0000000  104.00000  1.89%     -    5s
+     0     0  104.00000    0   40  106.00000  104.00000  1.89%     -    5s
+     0     0  104.00000    0   32  106.00000  104.00000  1.89%     -    6s
+     0     0  104.00000    0   15  106.00000  104.00000  1.89%     -    6s
+     0     0 infeasible    0       106.00000  106.00000  0.00%     -    6s
+
+Cutting planes:
+  Gomory: 2
+  Clique: 4
+  Zero half: 2
+
+Explored 1 nodes (29947 simplex iterations) in 6.23 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 7: 106 125 160 ... 424
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.060000000000e+02, best bound 1.060000000000e+02, gap 0.0000%

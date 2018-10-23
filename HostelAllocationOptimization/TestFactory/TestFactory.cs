@@ -19,7 +19,7 @@ namespace HostelAllocationOptimization.TestFactory
             hostelAllocation.GroupsDemands = new List<Tuple<int, int>>();
 
             var random = new Random();
-            hostelAllocation.NumDays = random.Next(5, 10);
+            hostelAllocation.NumDays = random.Next(10, 20);
             //hostelAllocation.NumDays = 10;
             int hostelCapacity = random.Next(20, 50);
             //int hostelCapacity = 30;

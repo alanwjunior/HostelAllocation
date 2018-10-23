@@ -21,16 +21,12 @@ namespace HostelAllocationOptimization.Controllers
         {
             List<string> jsonFiles = new List<string>
             {
-                "simulation4.json",
-                "simulation5.json",
-                "simulation6.json",
-                "simulation11.json",
-                "simulation12.json",
-                "simulation13.json",
-                "simulation14.json",
-                "simulation15.json",
-                "simulation16.json",
-                "simulation17.json"
+                "simulation20.json",
+                "simulation21.json",
+                "simulation22.json",
+                "simulation23.json",
+                "simulation24.json",
+                "simulation25.json"
             };
             Optimizer.HostelAllocationOptimizer.OptimizeWithGroupSplit(jsonFiles);
         }
