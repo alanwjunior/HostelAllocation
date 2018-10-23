@@ -722,7 +722,7 @@ namespace HostelAllocationOptimization.Optimizer
                 }
             }
 
-            using (StreamWriter file = File.CreateText(@"C:\\Users\\alanw\\OneDrive\\Documentos\\GitHub\\HostelAllocation\\HostelAllocationOptimization\\bin\\Debug\\netcoreapp2.0\\AutomatizatedTestsResults2.json"))
+            using (StreamWriter file = File.CreateText(@"C:\\Users\\alanw\\OneDrive\\Documentos\\GitHub\\HostelAllocation\\HostelAllocationOptimization\\bin\\Debug\\netcoreapp2.0\\AutomatizatedTestsResults21.json"))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, results);
