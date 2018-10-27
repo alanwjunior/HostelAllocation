@@ -876,14 +876,18 @@ namespace HostelAllocationOptimization.Optimizer
             List<int> groupsLeft = new List<int>();
             foreach (var group in groups)
             {
-                if(lastDayGroups.Any(g => g == group)) {
+                if(!lastDayGroups.Any(g => g == group)) {
                     groupsEntered.Add(group);
-                } else
+                }
+            }
+            dailyAllocation.GroupsEntered = string.Join(";", groupsEntered);
+            foreach (var group in lastDayGroups)
+            {
+                if (!groups.Any(g => g == group))
                 {
                     groupsLeft.Add(group);
                 }
             }
-            dailyAllocation.GroupsEntered = string.Join(";", groupsEntered);
             dailyAllocation.GroupsLeft = string.Join(";", groupsLeft);
         }
     }
