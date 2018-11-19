@@ -13,4 +13,4 @@ Finalizada essa etapa, basta executar a aplicação:
 ```
 npm run serve
 ```
-O back-end se encontra na pasta HostelAllocationOptimization e basta compilar o projeto para execução.
+O back-end se encontra na pasta HostelAllocationOptimization e basta compilar o projeto para execução. A aplicação se encontrará disponível em http:localhost:8080.
